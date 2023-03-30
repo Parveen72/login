@@ -1,0 +1,74 @@
+<p>userdash works!</p>
+<nav class="navbar navbar-light bg-primary">
+<div class="container-fluid">
+    
+        <h1>USER DATA</h1>
+        <div class="d-flex">
+            <button type="button"(click)="onAdd()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add USER</button>
+            <button routerLink="/login" class="btn btn-danger mx-2">Logout</button>
+        </div>
+    
+   
+</div>
+</nav>
+<table class="table mt-3">
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+
+        <th>Salary</th>
+        <th>Action</th>
+
+    </thead>
+    <tbody>
+        <tr *ngFor="let ob of empData">
+            <td>{{ob.id}}</td>
+            <td>{{ob.firstname}}</td>
+            <td>{{ob.email}}</td>
+            <td>{{ob.salary}}</td>
+       
+          <td> <button (click)="onEdit(ob)"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
+            <button (click)="deleteEmpData(ob)" class="btn btn-danger mx-3" >Delete</button>
+        </td>
+        </tr>
+    </tbody>
+</table>
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">USER DETAILS</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="myform">
+                <div class="mb-3">
+                    <label for="user_name" class="form-label">User Name</label>
+                    <input type="text" formControlName="firstname" class="form-control" id="user_name">
+                  </div>
+
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+               
+                <div class="mb-3">
+                    <label for="salary" class="form-label">Salary</label>
+                    <input type="text" formControlName= "salary" class="form-control" id="salary">
+                  </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" *ngIf="showEdit" (click)="postEmpDetails()" class="btn btn-primary">ADD</button>
+          <button type="button" *ngIf="showUpdate" (click)="updateEmpData()" class="btn btn-primary">Update</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
